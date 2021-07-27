@@ -8,13 +8,13 @@ def save_five(filename, list):
     file.close()
     print(f'[INFO] {filename} saved.')
 
-def rand_operand_generator(lower, upper):
+def random_operand(lower, upper):
     return random.randint(lower, upper)
 
-def calc(a, operand, b):
-    if operand == "+":
+def calc(a, action, b):
+    if action == "+":
         return a+b
-    elif operand == "-":
+    elif action == "-":
         return a-b
 
 def get_random_action(ACTIONS):
@@ -28,14 +28,13 @@ def math_operations(LOWER, UPPER, ACTIONS, AMOUND_TASKS):
     while count < AMOUND_TASKS:
         random_action = get_random_action(ACTIONS)
 
-        a = rand_operand_generator(lower=LOWER, upper=UPPER)
-        b = rand_operand_generator(lower=LOWER, upper=UPPER)
+        a = random_operand(lower=LOWER, upper=UPPER)
+        b = random_operand(lower=LOWER, upper=UPPER)
 
         c = calc(a, random_action, b)
         if (c >= 0 and c < UPPER):
             mathTask.append(f"{a} {random_action} {b} = ")
             mathAnswers.append(f"{a} {random_action} {b} = {c}")
-            # print(f"[SAVED] {a} {randOperand} {b} = ")
             count = count + 1
 
     save_five('MathTasks.txt', mathTask)
@@ -44,9 +43,10 @@ def math_operations(LOWER, UPPER, ACTIONS, AMOUND_TASKS):
 def logical_operations(LOWER, UPPER, AMOUND_TASKS):
     log_operations = []
     count = 0
+
     while count < AMOUND_TASKS:
-        a = rand_operand_generator(lower=LOWER, upper=UPPER)
-        b = rand_operand_generator(lower=LOWER, upper=UPPER)
+        a = random_operand(lower=LOWER, upper=UPPER)
+        b = random_operand(lower=LOWER, upper=UPPER)
         log_operations.append(f'{a}    {b}')
         count = count + 1
 
