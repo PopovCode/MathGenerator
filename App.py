@@ -38,8 +38,12 @@ def math_operations(LOWER, UPPER, ACTIONS, AMOUND_TASKS):
             mathAnswers.append(f"{a} {random_action} {b} = {c}")
             count = count + 1
 
-    save_file('MathTasks.txt', mathTask)
-    save_file('MathAnswers.txt', mathAnswers)
+    save_file(filename='output/txt/MathTasks.txt', list=mathTask)
+    save_to_pdf(filename='output/pdf/MathTasks.pdf', list=mathTask, title='Математические операции')
+
+    save_file(filename='output/txt/MathAnswers.txt', list=mathAnswers)
+    save_to_pdf(filename='output/pdf/MathAnswers.pdf', list=mathTask, title='Математические операции (Ответы)')
+
 
 def logical_operations(LOWER, UPPER, AMOUND_TASKS):
     log_operations = []
@@ -51,16 +55,18 @@ def logical_operations(LOWER, UPPER, AMOUND_TASKS):
         log_operations.append(f'{a}          {b}')
         count = count + 1
 
-    save_file('LogicalOperations.txt', log_operations)
-    save_to_pdf('LogicalOperations.pdf', log_operations)
+    save_file(filename='output/txt/LogicalOperations.txt', list=log_operations)
+    save_to_pdf(filename='output/pdf/LogicalOperations.pdf', list=log_operations, title="Логические операции")
 
-def save_to_pdf(filename, list):
-    pdf = FPDF('P', 'mm', 'Letter')
+def save_to_pdf(filename, list, title):
+    pdf = FPDF('P', 'mm', format="A4")
     pdf.add_page()
-    pdf.set_font('helvetica', '', 16)
-    pdf.cell(100,10, 'Logical', ln=1, align='C')
+    pdf.add_font('DejaVu', '', 'DejaVuSerifCondensed.ttf', uni=True)
+    pdf.set_font('DejaVu', '', 16)
+    pdf.cell(200, 10, title, ln=1, align='C')
+    print(f'[INFO] {filename} saved.')
     for item in list:
-        pdf.cell(100, 15, item, ln=True)
+        pdf.cell(10, 15, item, ln=True)
     pdf.output(filename)
 
 def main():
@@ -72,12 +78,10 @@ def main():
     ACTIONS = ['+', '-']
 
     # Количество генерируемых задач
-    AMOUND_TASKS = 20
+    AMOUND_TASKS = 17
 
     math_operations(LOWER_OPERAND,UPPER_OPERAND, ACTIONS, AMOUND_TASKS)
     logical_operations(LOWER_OPERAND, UPPER_OPERAND, AMOUND_TASKS)
-
-
 
 if __name__ == "__main__":
     main()
