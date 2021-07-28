@@ -27,12 +27,12 @@ def math_operations(LOWER, UPPER, ACTIONS, AMOUND_TASKS):
     count = 0
 
     while count < AMOUND_TASKS:
-        random_action = get_random_action(ACTIONS)
+        random_action = get_random_action(ACTIONS=ACTIONS)
 
         a = random_operand(lower=LOWER, upper=UPPER)
         b = random_operand(lower=LOWER, upper=UPPER)
 
-        c = calc(a, random_action, b)
+        c = calc(a=a, action=random_action, b=b)
         if (c >= 0 and c < UPPER):
             mathTask.append(f"{a} {random_action} {b} = ")
             mathAnswers.append(f"{a} {random_action} {b} = {c}")
@@ -78,10 +78,10 @@ def main():
     ACTIONS = ['+', '-']
 
     # Количество генерируемых задач
-    AMOUND_TASKS = 17
+    AMOUND_TASKS = 15
 
-    math_operations(LOWER_OPERAND,UPPER_OPERAND, ACTIONS, AMOUND_TASKS)
-    logical_operations(LOWER_OPERAND, UPPER_OPERAND, AMOUND_TASKS)
+    math_operations(LOWER=LOWER_OPERAND, UPPER=UPPER_OPERAND, ACTIONS=ACTIONS, AMOUND_TASKS=AMOUND_TASKS)
+    logical_operations(LOWER=LOWER_OPERAND, UPPER=UPPER_OPERAND, AMOUND_TASKS=AMOUND_TASKS)
 
 if __name__ == "__main__":
     main()
